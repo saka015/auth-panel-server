@@ -13,7 +13,18 @@ setupDatabase();
 seedUser();
 
 const app = express();
-app.use(cors());
+app.use(
+    cors({
+        origin: [
+            "https://auth-panel.thekamalnayan.live",
+            "https://auth-panel-ten.vercel.app",
+            "http://localhost:3000",
+        ],
+        credentials: true,
+        methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+        allowedHeaders: ["Content-Type", "Authorization", "x-auth-token"],
+    })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/userImages", express.static("public/userImages"));
